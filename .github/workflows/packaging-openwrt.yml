@@ -202,15 +202,15 @@ jobs:
           ln -sf /builder/${SELECT_PACKITPATH} /opt/${SELECT_PACKITPATH}
 
       - name: Replace with custom rockchip.dtb
-        working-directory: /builder/openwrt_packit
+        working-directory: /builder
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           # Download or copy your custom rockchip.dtb file
           # For example, if your custom DTB is hosted online:
-          curl -fsSL https://github.com/Adam-Strange/flippy-openwrt-actions/raw/refs/heads/main/rockchip.dtb -o rockchip.dtb
+          curl -fsSL https://github.com/Adam-Strange/flippy-openwrt-actions/raw/refs/heads/main/rockchip.dtb -o custom_rockchip.dtb
 
           # Replace the existing DTB file in the packit directory
-          cp rockchip.dtb /builder/openwrt_packit/rockchip.dtb
+          cp custom_rockchip.dtb /builder/openwrt_packit/rockchip.dtb
 
       - name: Package OpenWrt Firmware
         uses: ophub/flippy-openwrt-actions@main
